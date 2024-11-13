@@ -1,0 +1,42 @@
+name: deploy frontend to cloudflare
+
+on: [push]
+
+jobs:
+  deploy-frontend-to-cloudflare:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install poetry
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: 1.8.3
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Init Reflex
+        run: poetry run task init
+
+      - name: Export
+        env:
+        run: poetry run reflex export --frontend-only
+
+      - name: Unzip
+        run: unzip frontend.zip -d frontend-public
+    
+      - name: Publish
+        uses: cloudflare/pages-action@1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }} # <--- account id from Dashboard Screenshot 
+          projectName: frontend # <--- here put the name of the page from Dashboard Screenshot 
+          directory: frontend-public 
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
