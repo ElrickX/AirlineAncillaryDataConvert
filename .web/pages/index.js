@@ -1,18 +1,140 @@
 /** @jsxImportSource @emotion/react */
 
 
-import { Fragment, useCallback, useContext, useEffect, useState } from "react"
-import { ColorModeContext, EventLoopContext } from "$/utils/context"
+import { ErrorBoundary } from "react-error-boundary"
+import { Fragment, useCallback, useContext, useEffect, useRef, useState } from "react"
+import { ColorModeContext, EventLoopContext, StateContexts, UploadFilesContext } from "$/utils/context"
 import { Event, getBackendURL, isTrue, refs } from "$/utils/state"
 import { MoonIcon as LucideMoonIcon, SunIcon as LucideSunIcon, WifiOffIcon as LucideWifiOffIcon } from "lucide-react"
 import { keyframes } from "@emotion/react"
 import { toast, Toaster } from "sonner"
 import env from "$/env.json"
-import { Button as RadixThemesButton, Code as RadixThemesCode, Container as RadixThemesContainer, Flex as RadixThemesFlex, Heading as RadixThemesHeading, IconButton as RadixThemesIconButton, Link as RadixThemesLink, Text as RadixThemesText } from "@radix-ui/themes"
+import { Box as RadixThemesBox, Button as RadixThemesButton, Container as RadixThemesContainer, Flex as RadixThemesFlex, Heading as RadixThemesHeading, IconButton as RadixThemesIconButton, Link as RadixThemesLink, Text as RadixThemesText } from "@radix-ui/themes"
+import {  } from "react-dropzone"
+import { useDropzone } from "react-dropzone"
 import NextLink from "next/link"
 import NextHead from "next/head"
 
 
+
+export function Comp_d76aebd495d556d668eee1984863f2dd () {
+  const ref_upload1 = useRef(null); refs["ref_upload1"] = ref_upload1;
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+  const [filesById, setFilesById] = useContext(UploadFilesContext);
+  const on_drop_0db64617fc696f4b223306ba8c435f5b = useCallback(e => setFilesById(filesById => {
+    const updatedFilesById = Object.assign({}, filesById);
+    updatedFilesById["upload1"] = e;
+    return updatedFilesById;
+  })
+    , [addEvents, Event, filesById, setFilesById])
+  const {getRootProps: fradflwo, getInputProps: uzkfwzws}  = useDropzone(({ ["onDrop"] : on_drop_0db64617fc696f4b223306ba8c435f5b, ["accept"] : ({ ["application/xlsx"] : [".xlsx"] }), ["maxFiles"] : 1, ["multiple"] : true, ["id"] : "upload1" }));
+
+
+
+  return (
+    <>
+
+<RadixThemesBox className={"rx-Upload"} css={({ ["border"] : "1px dotted blue", ["padding"] : "5em", ["textAlign"] : "center" })} id={"upload1"} ref={ref_upload1} {...fradflwo()}>
+
+<input type={"file"} {...uzkfwzws()}/>
+<RadixThemesFlex align={"start"} className={"rx-Stack"} direction={"column"} gap={"3"}>
+
+<RadixThemesButton css={({ ["color"] : "blue", ["background"] : "white", ["border"] : "1px solid blue" })}>
+
+{"Select File"}
+</RadixThemesButton>
+<RadixThemesText as={"p"}>
+
+{"Drag and drop files here or click to select files"}
+</RadixThemesText>
+</RadixThemesFlex>
+</RadixThemesBox>
+</>
+  )
+}
+
+                function Fallback({ error, resetErrorBoundary }) {
+                    return (
+                        <div>
+
+<p>
+
+{"Ooops...Unknown Reflex error has occured:"}
+</p>
+<p css={({ ["color"] : "red" })}>
+
+{error.message}
+</p>
+<p>
+
+{"Please contact the support."}
+</p>
+</div>
+                    );
+                }
+            
+
+export function Fragment_ce8bcea548e7072af157110c53ab895c () {
+  const { resolvedColorMode } = useContext(ColorModeContext)
+
+
+
+  return (
+    <Fragment>
+
+{isTrue((resolvedColorMode === "light")) ? (
+  <Fragment>
+
+<LucideSunIcon css={({ ["color"] : "var(--current-color)" })}/>
+</Fragment>
+) : (
+  <Fragment>
+
+<LucideMoonIcon css={({ ["color"] : "var(--current-color)" })}/>
+</Fragment>
+)}
+</Fragment>
+  )
+}
+
+export function Button_640687212ca388d8d406019e88a78c8a () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+  const on_click_f37cb40a99335170c8c4802a8ae26fdd = useCallback(((...args) => (addEvents([(Event("reflex___state____state.airline_ancillary_data_convert____airline_ancillary_data_convert____state.download_file", ({  }), ({  })))], args, ({  })))), [addEvents, Event])
+
+
+  return (
+    <RadixThemesButton onClick={on_click_f37cb40a99335170c8c4802a8ae26fdd}>
+
+{"Download"}
+</RadixThemesButton>
+  )
+}
+
+const pulse = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`
+
+
+export function Button_46a2bf21cdce03172f4fc8713b440e5e () {
+  const [filesById, setFilesById] = useContext(UploadFilesContext);
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+  const on_click_569ad31f181536d060823916fa7d6842 = useCallback(((...args) => (addEvents([(Event("reflex___state____state.airline_ancillary_data_convert____airline_ancillary_data_convert____state.generate_file", ({ ["files"] : filesById["upload1"], ["upload_id"] : "upload1" }), ({  }), "uploadFiles"))], args, ({  })))), [addEvents, Event, filesById, setFilesById])
+
+
+  return (
+    <RadixThemesButton onClick={on_click_569ad31f181536d060823916fa7d6842}>
+
+{"Upload"}
+</RadixThemesButton>
+  )
+}
 
 export function Link_7bc499f266de6ff47946c9a12e326873 () {
   const { resolvedColorMode } = useContext(ColorModeContext)
@@ -42,90 +164,6 @@ export function Link_7bc499f266de6ff47946c9a12e326873 () {
   )
 }
 
-const pulse = keyframes`
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-`
-
-
-export function Div_bd4c022a8f796682aa6392e9d4c102e9 () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-
-
-
-  return (
-    <div css={({ ["position"] : "fixed", ["width"] : "100vw", ["height"] : "0" })} title={("Connection Error: "+((connectErrors.length > 0) ? connectErrors[connectErrors.length - 1].message : ''))}>
-
-<Fragment_9017984ada32ffa55f5d2870ebd3c887/>
-</div>
-  )
-}
-
-export function Fragment_9017984ada32ffa55f5d2870ebd3c887 () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-
-
-
-  return (
-    <Fragment>
-
-{isTrue((connectErrors.length > 0)) ? (
-  <Fragment>
-
-<LucideWifiOffIcon css={({ ["color"] : "crimson", ["zIndex"] : 9999, ["position"] : "fixed", ["bottom"] : "33px", ["right"] : "33px", ["animation"] : (pulse+" 1s infinite") })} size={32}/>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
-  )
-}
-
-export function Link_1b36db6782cdcdc041687fcfda301366 () {
-
-
-
-  return (
-    <RadixThemesLink asChild={true} css={({ ["&:hover"] : ({ ["color"] : "var(--accent-8)" }) })} target={(true ? "_blank" : "")}>
-
-<NextLink href={"https://reflex.dev/docs/getting-started/introduction/"} passHref={true}>
-
-<RadixThemesButton>
-
-{"Check out our docs!"}
-</RadixThemesButton>
-</NextLink>
-</RadixThemesLink>
-  )
-}
-
-export function Fragment_ce8bcea548e7072af157110c53ab895c () {
-  const { resolvedColorMode } = useContext(ColorModeContext)
-
-
-
-  return (
-    <Fragment>
-
-{isTrue((resolvedColorMode === "light")) ? (
-  <Fragment>
-
-<LucideSunIcon css={({ ["color"] : "var(--current-color)" })}/>
-</Fragment>
-) : (
-  <Fragment>
-
-<LucideMoonIcon css={({ ["color"] : "var(--current-color)" })}/>
-</Fragment>
-)}
-</Fragment>
-  )
-}
-
 export function Iconbutton_5d4a20c282d066f2f46dc5923d99db7b () {
   const { toggleColorMode } = useContext(ColorModeContext)
   const [addEvents, connectErrors] = useContext(EventLoopContext);
@@ -138,6 +176,51 @@ export function Iconbutton_5d4a20c282d066f2f46dc5923d99db7b () {
 
 <Fragment_ce8bcea548e7072af157110c53ab895c/>
 </RadixThemesIconButton>
+  )
+}
+
+export function Errorboundary_0bf12bf5d365e6c5f9119e705d521681 () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+  const on_error_0f5dbf674521530422d73a7946faf6d4 = useCallback(((_error, _info) => (addEvents([(Event("reflex___state____state.reflex___state____frontend_event_exception_state.handle_frontend_exception", ({ ["stack"] : _error["stack"], ["component_stack"] : _info["componentStack"] }), ({  })))], [_error, _info], ({  })))), [addEvents, Event])
+
+
+  return (
+    <ErrorBoundary FallbackComponent={Fallback} onError={on_error_0f5dbf674521530422d73a7946faf6d4}>
+
+<Fragment>
+
+<Div_bd4c022a8f796682aa6392e9d4c102e9/>
+<Toaster_6e6ebf8d7ce589d59b7d382fb7576edf/>
+</Fragment>
+<RadixThemesContainer css={({ ["padding"] : "16px" })} size={"3"}>
+
+<Iconbutton_5d4a20c282d066f2f46dc5923d99db7b/>
+<RadixThemesFlex align={"start"} className={"rx-Stack"} css={({ ["minHeight"] : "85vh" })} direction={"column"} justify={"center"} gap={"5"}>
+
+<RadixThemesHeading size={"9"}>
+
+{"Welcome to Airline Ancillary Data convert!"}
+</RadixThemesHeading>
+<Comp_d76aebd495d556d668eee1984863f2dd/>
+<Button_46a2bf21cdce03172f4fc8713b440e5e/>
+<Button_640687212ca388d8d406019e88a78c8a/>
+<Fragment_efa4fa7563b726c932fd49a2f8f2a957/>
+</RadixThemesFlex>
+<RadixThemesFlex css={({ ["display"] : "flex", ["alignItems"] : "center", ["justifyContent"] : "center", ["width"] : "100%" })}>
+
+<Link_7bc499f266de6ff47946c9a12e326873/>
+</RadixThemesFlex>
+</RadixThemesContainer>
+<NextHead>
+
+<title>
+
+{"Airlineancillarydataconvert | Index"}
+</title>
+<meta content={"favicon.ico"} property={"og:image"}/>
+</NextHead>
+</ErrorBoundary>
   )
 }
 
@@ -170,48 +253,66 @@ export function Toaster_6e6ebf8d7ce589d59b7d382fb7576edf () {
   )
 }
 
-export default function Component() {
+export function Div_bd4c022a8f796682aa6392e9d4c102e9 () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
+
+  return (
+    <div css={({ ["position"] : "fixed", ["width"] : "100vw", ["height"] : "0" })} title={("Connection Error: "+((connectErrors.length > 0) ? connectErrors[connectErrors.length - 1].message : ''))}>
+
+<Fragment_9017984ada32ffa55f5d2870ebd3c887/>
+</div>
+  )
+}
+
+export function Fragment_efa4fa7563b726c932fd49a2f8f2a957 () {
+  const reflex___state____state__airline_ancillary_data_convert____airline_ancillary_data_convert____cond_state = useContext(StateContexts.reflex___state____state__airline_ancillary_data_convert____airline_ancillary_data_convert____cond_state)
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
 
   return (
     <Fragment>
 
-<Fragment>
+{isTrue(reflex___state____state__airline_ancillary_data_convert____airline_ancillary_data_convert____cond_state.show) ? (
+  <Fragment>
 
-<Div_bd4c022a8f796682aa6392e9d4c102e9/>
-<Toaster_6e6ebf8d7ce589d59b7d382fb7576edf/>
+<RadixThemesButton onClick={((...args) => (addEvents([(Event("reflex___state____state.airline_ancillary_data_convert____airline_ancillary_data_convert____state.download_file", ({  }), ({  })))], args, ({  }))))}>
+
+{"Download"}
+</RadixThemesButton>
 </Fragment>
-<RadixThemesContainer css={({ ["padding"] : "16px" })} size={"3"}>
-
-<Iconbutton_5d4a20c282d066f2f46dc5923d99db7b/>
-<RadixThemesFlex align={"start"} className={"rx-Stack"} css={({ ["minHeight"] : "85vh" })} direction={"column"} justify={"center"} gap={"5"}>
-
-<RadixThemesHeading size={"9"}>
-
-{"Welcome to Reflex!"}
-</RadixThemesHeading>
-<RadixThemesText as={"p"} size={"5"}>
-
-{"Get started by editing "}
-<RadixThemesCode>
-
-{"AirlineAncillaryDataConvert/AirlineAncillaryDataConvert.py"}
-</RadixThemesCode>
-</RadixThemesText>
-<Link_1b36db6782cdcdc041687fcfda301366/>
-</RadixThemesFlex>
-<RadixThemesFlex css={({ ["display"] : "flex", ["alignItems"] : "center", ["justifyContent"] : "center", ["width"] : "100%" })}>
-
-<Link_7bc499f266de6ff47946c9a12e326873/>
-</RadixThemesFlex>
-</RadixThemesContainer>
-<NextHead>
-
-<title>
-
-{"Airlineancillarydataconvert | Index"}
-</title>
-<meta content={"favicon.ico"} property={"og:image"}/>
-</NextHead>
+) : (
+  <Fragment/>
+)}
 </Fragment>
+  )
+}
+
+export function Fragment_9017984ada32ffa55f5d2870ebd3c887 () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
+
+  return (
+    <Fragment>
+
+{isTrue((connectErrors.length > 0)) ? (
+  <Fragment>
+
+<LucideWifiOffIcon css={({ ["color"] : "crimson", ["zIndex"] : 9999, ["position"] : "fixed", ["bottom"] : "33px", ["right"] : "33px", ["animation"] : (pulse+" 1s infinite") })} size={32}/>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+export default function Component() {
+
+  return (
+    <Errorboundary_0bf12bf5d365e6c5f9119e705d521681/>
   )
 }
